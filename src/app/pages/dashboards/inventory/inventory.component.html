@@ -1,0 +1,165 @@
+<!-- inventory.component.html -->
+<main class="main-container">
+    <div class="content-wrapper">
+        <!-- Page Heading -->
+        <div class="page-header">
+            <h1 class="page-title">Raw Cotton Inventory Management</h1>
+            <button class="btn-primary" (click)="addNewBale()">
+                <span class="material-symbols-outlined">+</span>
+                <span>Add New Bale</span>
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">Total Inventory (kg)</p>
+                <p class="stat-value">{{ stats.total | number }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Available Inventory (kg)</p>
+                <p class="stat-value">{{ stats.available | number }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Quarantined Inventory (kg)</p>
+                <p class="stat-value">{{ stats.quarantined | number }}</p>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="filter-section">
+            <div class="filter-grid">
+                <div class="search-wrapper">
+                    <label class="search-label">
+                        <div class="search-input-wrapper">
+                            <div class="search-icon">
+                                <span class="material-symbols-outlined">🔍︎</span>
+                            </div>
+                            <input 
+                                class="search-input" 
+                                placeholder="Search by Bale ID, Lot Number, Vendor..."
+                                [(ngModel)]="searchQuery"
+                                (ngModelChange)="onSearchChange($event)"
+                            />
+                        </div>
+                    </label>
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn" (click)="onStatusChange('All')">
+                        <p>Status: {{ selectedStatus }}</p>
+                        <span class="bx bx-chevron-down"></span>
+                    </button>
+                    <button class="filter-btn" (click)="onVendorChange('All')">
+                        <p>Vendor: {{ selectedVendor }}</p>
+                        <span class="bx bx-chevron-down"></span>
+                    </button>
+                    <button class="filter-btn" (click)="onStationChange('All')">
+                        <p>Station: {{ selectedStation }}</p>
+                        <span class="bx bx-chevron-down"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="th-checkbox">
+                            <input 
+                                class="checkbox" 
+                                type="checkbox"
+                                [checked]="allSelected"
+                                (change)="toggleSelectAll()"
+                            />
+                        </th>
+                        <th>Bale ID</th>
+                        <th>Lot Number</th>
+                        <th>Vendor Name</th>
+                        <th>Station Name</th>
+                        <th class="text-right">Weight (kg)</th>
+                        <th>Status</th>
+                        <th class="text-right">Staple (mm)</th>
+                        <th class="text-right">Mic (µg/in)</th>
+                        <th class="text-right">Strength (g/tex)</th>
+                        <th class="text-right">Trash (%)</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let bale of displayedBales">
+                        <td class="td-checkbox">
+                            <input 
+                                class="checkbox" 
+                                type="checkbox"
+                                [checked]="bale.selected"
+                                (change)="toggleBaleSelection(bale)"
+                            />
+                        </td>
+                        <td class="bale-id">{{ bale.id }}</td>
+                        <td>{{ bale.lotNumber }}</td>
+                        <td>{{ bale.vendorName }}</td>
+                        <td>{{ bale.stationName }}</td>
+                        <td class="text-right">{{ bale.weight }}</td>
+                        <td>
+                            <span class="badge" [ngClass]="getStatusClass(bale.status)">
+                                {{ bale.status }}
+                            </span>
+                        </td>
+                        <td class="text-right">{{ bale.staple }}</td>
+                        <td class="text-right">{{ bale.micronaire }}</td>
+                        <td class="text-right">{{ bale.strength }}</td>
+                        <td class="text-right">{{ bale.trash }}</td>
+                        <td class="text-center">
+                            <button class="action-btn" (click)="openBaleActions(bale, $event)">
+                                <span class="material-symbols-outlined">more_vert</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="displayedBales.length === 0">
+                        <td colspan="12" class="text-center" style="padding: 2rem;">
+                            No bales found matching your criteria
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+            <span class="pagination-info">
+                Showing {{ getStartIndex() }} to {{ getEndIndex() }} of {{ totalItems }} entries
+            </span>
+            <div class="pagination-controls">
+                <button 
+                    class="pagination-btn" 
+                    [disabled]="currentPage === 1"
+                    (click)="previousPage()"
+                >
+                    Previous
+                </button>
+                
+                <ng-container *ngFor="let page of getPaginationPages()">
+                    <button 
+                        *ngIf="page !== -1"
+                        class="pagination-btn"
+                        [ngClass]="{'pagination-active': currentPage === page}"
+                        (click)="goToPage(page)"
+                    >
+                        {{ page }}
+                    </button>
+                    <span *ngIf="page === -1" class="pagination-dots">...</span>
+                </ng-container>
+                
+                <button 
+                    class="pagination-btn"
+                    [disabled]="currentPage === totalPages"
+                    (click)="nextPage()"
+                >
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+</main>

@@ -14,6 +14,14 @@ export const MENU: MenuItem[] = [
         icon: 'bx-home-circle',
     },
 
+    {
+        id: 2,
+        label: 'Inventory',
+        link: '/Inventory',
+        parentId: 2,
+        icon: 'bx-box',
+    },
+
     // {
     //     id:4 ,
     //     label: 'Invoice Layout',
@@ -21,106 +29,20 @@ export const MENU: MenuItem[] = [
     //     parentId: 1,
     //     icon: 'bx bx-layout',
     // },
-    {
-        id: 5,
-        label: 'Invoice',
-        link: '/Invoice',
-        parentId: 1,
-        icon: 'bx bx-plus',
-    },
+   
 
-    {
-        id: 6,
-        label: 'Invoice Decision',
-        link: '/InvoiceDecision',
-        parentId: 1,
-        icon: 'bx-sync', // Represents invoice approval/decision
-    },
-    {
-        id: 7,
-        label: 'Funds Recieved Against',
-        link: '/funds_recived_against',
-        parentId: 1,
-        icon: 'bx-dollar', // Represents invoice approval/decision
-    },
-    {
-        id: 8,
-        label: 'Invoice Reports',
-        link: '/InvoiceReports',
-        parentId: 1,
-        icon: 'bx bx-spreadsheet',
-    },
-    {
-        id: 3,
-        label: 'Customer Creation',
-        link: '/CustomerCreation',
-        parentId: 1,
-        icon: 'bx-user-check', // Represents invoice approval/decision
-    },
-    {
-        id: 11,
-        label: 'Company Creation',
-        link: '/CompanyCreation',
-        parentId: 1,
-        icon: 'bx-home-circle',
-    },
+    
+    
+  
+   
+    
 
-    {
-        id: 10,
-        label: 'Services',
-        link: '/ServiceCharges',
-        parentId: 1,
-        icon: 'bx bx-receipt',
-    },
-    {
-        id: 10,
-        label: 'Product Master',
-        link: '/ProductMaster',
-        parentId: 1,
-        icon: 'bx bx-purchase-tag',
-    },
-    {
-        id: 10,
-        label: 'Inventory Management',
-        link: '/inventoryManagement',
-        parentId: 1,
-        icon: 'bx bx-package',
-    },
-    {
-        id: 10,
-        label: 'Stock Entry',
-        link: '/StockEntry',
-        parentId: 1,
-        icon: 'bx bx-archive-in',
-    },
-    {
-        id: 10,
-        label: 'Gate Entry',
-        link: '/Gateentry',
-        parentId: 1,
-        icon: 'bx bx-log-in',
-    },
-    {
-        id: 10,
-        label: 'Equipment Master',
-        link: '/equipmentMaster',
-        parentId: 1,
-        icon: 'bx bx-log-in',
-    },
-    {
-        id: 10,
-        label: 'Equipment Task List',
-        link: '/equipmenttaskList',
-        parentId: 1,
-        icon: 'bx bx-list-check',
-    },
-    {
-        id: 9,
-        label: 'User Creation',
-        link: '/InvoiceUserCreation',
-        parentId: 1,
-        icon: 'bx bx-user-check',
-    },
+    
+   
+    
+   
+    
+   
     // {
     //     id: 10,
     //     label: 'Company_Creation',

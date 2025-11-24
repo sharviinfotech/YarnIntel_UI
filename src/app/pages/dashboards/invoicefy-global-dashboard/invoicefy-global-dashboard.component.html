@@ -1,313 +1,134 @@
-<!-- <div class="marquee-container">
-  <div class="marquee-content">
-    Welcome to Sharvi Infotech — Empowering Digital Transformation | Software Solutions | Web & App Development | IT Consulting | Quality Services Delivered with Innovation!
-  </div>
-</div> -->
-<div class="flex w-full flex-auto flex-col" id="dashboard-container" >
-    <div class="header-row">
+<main class="main-container">
+  <div class="page-wrapper">
+
+    <!-- Header with Title and Actions -->
+    <div class="page-header">
       <div>
-        <h1>Dashboard</h1>
-        <p class="muted"></p>
+        <h1 class="page-title">Manufacturing Dashboard</h1>
+        <p class="updated-text">Overview of production and inventory status.</p>
       </div>
-      <div class="header-actions">
-        <div class="search">
-          <i class="icon">🔍</i>
-          <input placeholder="Search..." />
+      <!-- <div class="header-actions">
+        <button class="date-filter-btn">
+          📅 Last 7 Days ▼
+        </button>
+        <button class="btn-primary">
+          + New Mix Plan
+        </button>
+      </div> -->
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <p class="kpi-label">Total Active Mix Plans</p>
+        <p class="kpi-value">{{ kpiData.activeMixPlans }}</p>
+      </div>
+
+      <div class="kpi-card">
+        <p class="kpi-label">Raw Cotton Inventory (Tons)</p>
+        <p class="kpi-value">{{ kpiData.rawCottonInventory | number }}</p>
+
+        <div class="stock-status">
+          <div class="stock-row">
+            <span class="available-text">Available: {{ kpiData.rawCottonAvailable | number }}</span>
+            <span class="quarantine-text">Quarantined: {{ kpiData.rawCottonQuarantine }}</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="available-bar"></div>
+            <div class="quarantine-bar"></div>
+          </div>
         </div>
+      </div>
+
+      <div class="kpi-card">
+        <p class="kpi-label">No. of Bales</p>
+        <p class="kpi-value">7,500</p>
+      </div>
+
+      <div class="kpi-card">
+        <p class="kpi-label">Blocked Stock (kg)</p>
+        <p class="kpi-value">35,200</p>
+      </div>
+
+      <div class="kpi-card">
+        <p class="kpi-label">Pending Approvals</p>
+        <p class="kpi-value">{{ kpiData.pendingApprovals }}</p>
       </div>
     </div>
 
-    <div class="kpis">
-      <div class="kpi-card invoiced">
-        <span class="label">Total Invoiced</span>
-        <div class="value">{{ grandTotalInvoices | number:'1.2-2' }}</div>
-      </div>
-      <div class="kpi-card paid">
-        <span class="label">Total Paid</span>
-        <div class="value">{{ receivedTAXTotal | number:'1.2-2' }}</div>
-      </div>
-      <div class="kpi-card pending">
-        <span class="label">Total Pending</span>
-        <div class="value">{{ (pendingPQTotal + pendingTAXTotal) | number:'1.2-2' }}</div>
-      </div>
-      <div class="kpi-card overdue">
-        <span class="label">Total Overdue</span>
-        <div class="value">{{ (overdueTotal || 0) | number:'1.2-2' }}</div>
-      </div>
-    </div>
-    <!-- <div class="card">
-      <div class="rounded">
-        <div class="left-side">
-          <div class="status-box total-records" role="button" (click)="OnClickCard('1')" style="position: relative;">
-            <div class="flex items-center">
-            <i class="fas fa-database text-xl mr-2"></i>
-            <h3>Total Records</h3>
-            </div>
-
-             <p (mouseenter)="showTooltip = true" (mouseleave)="showTooltip = false" class="tooltip-target">
-              {{ totalInvoiceCount }}
-
-              <span class="tooltip-box" *ngIf="showTooltip">
-                Total Proforma Records : {{TotalCountPQ}}
-                <div class="d-flex gap-2">
-                  <div>Approved: {{ approvedCount }}</div>
-                <div>Rejected: {{ rejectedCount }}</div>
-                <div>Pending: {{ pendingCount }}</div>
-                </div>
-
-
-              </span>
-            </p>
-
-              <div class="flex items-center">
-            <h3>Amount</h3>
-            </div>
-            <p>{{ grandTotalInvoices | number:'1.2-2' }}</p>
-            </div>
-
-
-
-          <div class="middlewidth">
-            <div class="status-box total-Approved" role="button" (click)="OnClickCard('2')">
-              <div class="flex items-center">
-                <i class="fas fa-check-circle text-xl mr-2"></i>
-                <h3>Approved</h3>
-              </div>
-              <p>{{ approvedCount }}</p>
-              <div class="flex items-center">
-                <h3>Amount</h3>
-              </div>
-              <p>{{ approvedTotal | number:'1.2-2'  }}</p>
-            </div>
-
-            <div class="status-box total-rejected" role="button" (click)="OnClickCard('3')">
-              <div class="flex items-center">
-                <i class="fas fa-times-circle text-xl mr-2"></i>
-                <h3>Rejected</h3>
-              </div>
-              <p>{{ rejectedCount }}</p>
-              <div class="flex items-center">
-                <h3>Amount</h3>
-              </div>
-              <p>{{ rejectedTotal  | number:'1.2-2' }}</p>
-            </div>
-          </div>
-
-          <div class="rightwidth">
-            <div class="status-box Recevied_Amount" role="button" (click)="OnClickCard('4')">
-              <div class="flex items-center">
-                <i class="fas fa-wallet text-xl mr-2"></i>
-                <h3 class="font-semibold">Amount Received</h3>
-              </div>
-              <p class="text-lg font-bold">{{ AmountReceivedCount }}</p>
-
-              <div class="flex items-center mt-2">
-                <h3 class="font-semibold">Amount</h3>
-              </div>
-              <p class="text-lg font-bold">{{ AmountReceivedTotal | number:'1.2-2' }}</p>
-            </div>
-
-
-
-            <div class="status-box total-Pending" role="button" (click)="OnClickCard('5')">
-              <div class="flex items-center">
-                <i class="fas fa-hourglass-half text-xl mr-2"></i>
-                <h3>Payment Pending</h3>
-              </div>
-              <p>{{ PaymentPendingCount }}</p>
-              <div class="flex items-center">
-                <h3>Amount</h3>
-              </div>
-              <p>{{ PaymentPendingTotal | number:'1.2-2' }}</p>
-            </div>
-          </div>
-
-          <div class="status-box total-overall" role="button" (click)="OnClickCard('6')">
-            <div class="flex items-center">
-              <i class="fas fa-coins text-xl mr-2 text-white"></i>
-              <h3 class="font-semibold">Over All Count</h3>
-            </div>
-            <p class="text-lg font-bold">{{ OverAllAmountCount }}</p>
-
-            <div class="flex items-center mt-2">
-              <h3 class="font-semibold">Over All Amount</h3>
-            </div>
-            <p class="text-lg font-bold">{{ OverAllAmountTotal | number:'1.2-2' }}</p>
-          </div>
-        </div>
-
-        <div class="rightCard">
-          <apx-chart [series]="customerChartOptions.series" [chart]="customerChartOptions.chart"
-            [labels]="customerChartOptions.labels" [responsive]="customerChartOptions.responsive">
-          </apx-chart>
-        </div>
-      </div>
-    </div> -->
-    <div class="card">
-      <div class="row" *ngIf="monthlyCardDisplay">
-        <div class="col-lg-11 col-md-11 col-xl-11">
-          <div  style="background-color: #6ba3cd !important; color: white;padding: 10px;">SELECTED YEAR: {{ selectedYear }}</div>
-        </div>
-
-        <div class="col-lg-1 col-md-1 col-xl-1" style="text-align: right; padding: 0px;">
+    <!-- Main Grid: Chart + Right Panel -->
+    <div class="main-grid">
+      
+      <!-- Production Progress Chart -->
+      <div class="chart-card">
+        <div class="chart-header">
           <div>
-            <button  (click)="goBackToYearChart()" class="btn btn-primary text-nowrap">
-              <i class="fas fa-chevron-left"></i> Back
+            <p class="chart-title">Production Plan Progress</p>
+            <p class="chart-subtitle">Planned Vs Actual</p>
+          </div>
+
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-box planned"></div>
+              <span>Planned</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-box actual"></div>
+              <span>Actual</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bar-chart">
+          <div class="bar-column" *ngFor="let item of productionProgress">
+            <div class="bar-wrap">
+              <div class="bar planned" [style.height.%]="item.planned"></div>
+              <div class="bar actual" [style.height.%]="item.actual"></div>
+            </div>
+            <p class="day-label">{{ item.metric }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side Panel -->
+      <div class="right-panel">
+
+        <!-- Critical Alerts -->
+        <div class="panel-card">
+          <h2 class="panel-title">Critical Alerts</h2>
+
+          <div class="alert-item" *ngFor="let alert of alerts">
+            <div class="alert-icon" [ngClass]="alert.type"></div>
+            <div class="alert-content">
+              <p class="alert-text">{{ alert.message }}</p>
+              <p class="alert-time">{{ alert.time }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="panel-card">
+          <h2 class="panel-title">Quick Actions</h2>
+
+          <div class="action-grid">
+            <button class="btn-primary" (click)="createNewMixPlan()">
+              + New Mix Plan
+            </button>
+            <button class="btn-secondary" (click)="receiveBales()">
+              ⬇ Receive Bales
+            </button>
+            <button class="btn-secondary" (click)="qcEntry()">
+              ✓ QC Entry
+            </button>
+            <button class="btn-secondary" (click)="openApprovals()">
+              📋 Approvals
             </button>
           </div>
         </div>
-      </div>
 
-
-      <div *ngIf="monthlyCardDisplay == false" class="row" id="barChart" style="border: 2px solid darkviolet !important; margin-right: 0px !important; margin-left: 0px !important;">
-
-
-        <div class="col-md-6 col-lg-6" id="leftBar">
-          <div class="card-header">
-            <span>Revenue Overview</span>
-            <select>
-              <option>Last 30 days</option>
-            </select>
-          </div>
-          <apx-chart
-            [series]="barChartOptions.series"
-            [chart]="barChartOptions.chart"
-            [xaxis]="barChartOptions.xaxis"
-            [yaxis]="barChartOptions.yaxis"
-            [plotOptions]="barChartOptions.plotOptions"
-            [colors]="barChartOptions.colors">
-          </apx-chart>
-        </div>
-
-
-        <div *ngIf="pieChartOptions.series?.length > 0" class="col-md-6 col-lg-6" id="rightBar">
-          <div class="card-header">
-            <span>Invoice Status</span>
-          </div>
-          <apx-chart
-            [series]="pieChartOptions.series"
-            [chart]="pieChartOptions.chart"
-            [labels]="pieChartOptions.labels"
-            [colors]="pieChartOptions.colors">
-          </apx-chart>
-    <div class="card-header">
-
-        </div>
-
-      </div>
-
-
-
-<div *ngIf="monthlyCardDisplay" class="row mt-1"  style="margin-top: 30px; border: 2px solid darkviolet !important; margin-right: 0px !important; margin-left: 0px !important;">
-
-  <div class="col-md-6 col-lg-6" id="leftBar">
-    <div class="card-header">
-      <span>Revenue Overview</span>
-      <select>
-        <option>Last 30 days</option>
-      </select>
-    </div>
-    <apx-chart
-      [series]="monthlyBarChartOptions.series"
-      [chart]="monthlyBarChartOptions.chart"
-      [xaxis]="monthlyBarChartOptions.xaxis"
-      [yaxis]="monthlyBarChartOptions.yaxis"
-      [dataLabels]="monthlyBarChartOptions.dataLabels"
-      [plotOptions]="monthlyBarChartOptions.plotOptions"
-      [colors]="monthlyBarChartOptions.colors">
-    </apx-chart>
-  </div>
-
-  <div *ngIf="monthlyPieChartOptions" class="col-md-6 col-lg-6" id="rightBar">
-    <div class="card-header">
-      <span>Invoice Status</span>
-    </div>
-    <apx-chart
-      [series]="monthlyPieChartOptions.series"
-      [chart]="monthlyPieChartOptions.chart"
-      [labels]="monthlyPieChartOptions.labels"
-      [colors]="monthlyPieChartOptions.colors"
-      [legend]="monthlyPieChartOptions.legend">
-    </apx-chart>
-  </div>
-</div>
-
-
-    </div>
-
-
-    <!-- <div class="card">
-      <div class="row" id="barChart" style="margin-top: 30px;" style="margin-top: 10px;border: 2px solid darkviolet !important;margin-right: 0px !important;
-            margin-left: 0px !important;">
-      <div class="col-md-6 col-lg-6" id="leftBar">
-        <apx-chart [series]="barChartOptions.series" [chart]="barChartOptions.chart" [xaxis]="barChartOptions.xaxis"
-          [yaxis]="barChartOptions.yaxis" [plotOptions]="barChartOptions.plotOptions" [colors]="barChartOptions.colors">
-        </apx-chart>
-      </div>
-
-      <div *ngIf="pieChartOptions.series?.length > 0" class="col-md-6 col-lg-6" id="rightBar">
-        <apx-chart [options]="pieChartOptions" [series]="pieChartOptions.series" [chart]="pieChartOptions.chart"
-          [labels]="pieChartOptions.labels" [colors]="pieChartOptions.colors">
-        </apx-chart>
       </div>
     </div>
-
-    </div> -->
-    <!-- below is comentad by sunil  start-->
-    <!-- <div class="row" style="margin-top: 30px;">
-
-      <div>
-        <apx-chart [series]="customerChartOptions.series" [chart]="customerChartOptions.chart"
-          [labels]="customerChartOptions.labels" [responsive]="customerChartOptions.responsive">
-        </apx-chart>
-      </div>
-
-
-
-    </div> -->
-<!-- below is comentad by sunil  end-->
 
   </div>
-
-
-
-
-  <div class="card">
-    <div class="card-header">
-      <span>Recent Invoices</span>
-      <a class="view-all" (click)="$event.preventDefault()">View All</a>
-    </div>
-    <div class="table-wrap">
-      <table class="modern-table">
-        <thead>
-          <tr>
-            <th>Invoice ID</th>
-            <th>Client Name</th>
-            <th>Due Date</th>
-            <th>Amount</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let invoice of filteredInvoiceList">
-            <td>{{ invoice.invoiceUniqueNumber }}</td>
-            <td>{{ invoice.header.ProformaCustomerName }}</td>
-            <td>{{ invoice.header.ProformaInvoiceDate }}</td>
-            <td>{{ invoice.grandTotal | number:'1.2-2' }}</td>
-            <td>
-              <span class="badge" [ngClass]="{
-                'paid': invoice.status === 'Amount Received' || invoice.status === 'Approved',
-                'pending': invoice.status === 'Pending',
-                'overdue': invoice.status === 'Rejected' || invoice.status === 'Rejected_Reversed'
-              }">{{ invoice.status }}</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- <button (click)="showSpinner()">Show Spinner</button> -->
+</main>

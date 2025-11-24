@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { AuthRoutingModule } from './auth-routing';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HomeComponent
+  ],
   imports: [
     AuthRoutingModule,
   ]

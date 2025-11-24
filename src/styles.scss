@@ -1239,11 +1239,7 @@ body.theme-light #sidebar-menu li.mm-active i {
   color: var(--theme-text-dark) !important;
 }
 
-/* Light theme: subtle separators between topbar/sidebar/content */
-body.theme-light .vertical-menu { border-right: 0.5px solid rgba(17,24,39,0.08) !important; }
-body.theme-light #page-topbar .navbar-header { 
-  // border-bottom: 1px solid rgba(17,24,39,0.08) !important; 
-}
+
 
 
 /* Light theme: vertical separator beside the hamburger (3 bars) */
@@ -1414,7 +1410,7 @@ body.theme-dark label { color: var(--theme-text-light) !important; }
 body.theme-dark input,
 body.theme-dark select,
 body.theme-dark textarea {
-  background-color: white !important;
+ 
   color: var(--theme-text-light) !important;
   border-color: #1f2a35 !important;
 }

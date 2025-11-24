@@ -87,7 +87,11 @@
 -->
 
 
-<div class="login-page light">
+
+ 
+ 
+
+ <div class="login-page light">
   <div class="login-left">
     <div class="left-content">
 
@@ -100,18 +104,18 @@
   <div class="login-right">
     <div class="form-wrapper">
       <ng-container *ngIf="!isForgotPassword; else forgotTpl">
-        <h3 class="form-title">Log in to your account</h3>
-        <p class="form-subtitle">Welcome back! Please enter your details.</p>
+        <h3 class="form-title">Welcome to Sharvi Product Portal</h3>
+        <!-- <p class="form-subtitle">Welcome back! Please enter your details.</p> -->
 
         <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
-            <label for="userName" class="form-label">User Name</label>
+            <label for="userName" class="form-label">User Name or Email</label>
             <div class="input-with-icon">
               <input id="userName" type="text" class="form-control" formControlName="userName"
-                placeholder="Enter your user name" [ngClass]="{ 'is-invalid': submitted && f['userName'].errors }">
+                placeholder="Enter your user name or email" [ngClass]="{ 'is-invalid': submitted && f['userName'].errors }">
               <i class="mdi mdi-account-outline input-icon"></i>
             </div>
-            <div class="invalid-feedback d-block" *ngIf="submitted && f['userName'].errors">User Name is required.</div>
+            <div class="invalid-feedback d-block" *ngIf="submitted && f['userName'].errors">User Name or Email is required.</div>
           </div>
 
           <div class="mb-2">
@@ -128,6 +132,41 @@
             </div>
             <div class="invalid-feedback d-block" *ngIf="submitted && f['password'].errors">Password is required.</div>
           </div>
+
+         <div class="mb-3">
+          <label for="companyCode" class="form-label">Company Code (optional)</label>
+          <div class="input-with-icon">
+            <input
+              id="companyCode"
+              type="text"
+              class="form-control"
+              formControlName="companyCode"
+              placeholder="Enter your Company Code"
+              [ngClass]="{ 'is-invalid': submitted && f['companyCode'].errors }"
+            />
+            <i class="mdi mdi-office-building-outline input-icon"></i>
+          </div>
+
+          <div class="invalid-feedback d-block" *ngIf="submitted && f['companyCode'].errors">
+            Company Code is required.
+          </div>
+        </div>
+
+
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="rememberMe">
+            <label class="checkbox-label" for="rememberMe">Remember Me</label>
+          </div>
+
+          <div class="recaptcha-box">
+            <div class="recaptcha-checkbox" id="recaptcha"></div>
+            <span class="recaptcha-text">I'm not a robot</span>
+          </div>
+         
+
+
+
+          
 
           <div class="d-flex justify-content-end mb-3">
             <a (click)="toggleForgotPassword()" class="forgot-link">Forgot Password?</a>
@@ -175,3 +214,4 @@
     </div>
   </div>
 </div>
+  
