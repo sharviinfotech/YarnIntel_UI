@@ -14,6 +14,9 @@ import { DashboardBackupComponent } from './dashboard-backup/dashboard-backup.co
 import { DefaultComponent } from './default/default.component';
 import { InvoicefyGlobalDashboardComponent } from './invoicefy-global-dashboard/invoicefy-global-dashboard.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { MixPlansComponent } from './mix-plans/mix-plans.component';
+import { StockEntryComponent } from './stock-entry/stock-entry.component';
+import { YarnbotComponent } from './yarnbot/yarnbot.component';
 
 
 
@@ -25,6 +28,9 @@ import { InventoryComponent } from './inventory/inventory.component';
 @NgModule({
   declarations: [
     SampleComponentComponent,
+    StockEntryComponent,
+    
+    
    
   ],
   imports: [

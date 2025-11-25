@@ -1498,3 +1498,70 @@ body.theme-dark .apexcharts-xaxis line, body.theme-dark .apexcharts-yaxis line {
     border-radius: 3px;
     margin-right: 5px;
   }
+  // google transalet start
+ 
+//google transalator css
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+#google_translate_element select {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px;
+  font-size: 14px;
+}
+/* Hide the Google Translate iframe */
+iframe.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none !important;
+  visibility: hidden !important;
+}
+/* Hide the Google Translate icon */
+img.goog-te-gadget-icon {
+  display: none !important;
+  visibility: hidden !important;
+}
+.VIpgJd-ZVi9od-xl07Ob-lTBxed {
+  pointer-events: none;  /* Disables click */
+  cursor: default; /* Changes cursor to normal */
+}
+ 
+.goog-te-gadget-simple {
+  background-color: #556ee6 !important;
+  border: 1px solid white !important;
+  color: white !important;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+ 
+ 
+ 
+// google transalte end
+.width-sm {
+  min-width: 100px;
+}
+
+.width-md {
+  min-width: 150px !important;
+
+}
+
+.width-lg {
+  min-width: 200px;
+}
+
+.width-xl {
+  min-width:250px;
+}
+
+ 

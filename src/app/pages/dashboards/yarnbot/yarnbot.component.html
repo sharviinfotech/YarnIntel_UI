@@ -1,0 +1,29 @@
+
+
+<!-- Chat Window -->
+<div class="chat-window" *ngIf="isChatOpen">
+  <div class="chat-header">
+    Yarn Bot
+    <span class="close-btn" (click)="toggleChat()">✖</span>
+  </div>
+
+  <div class="chat-body">
+    <div *ngFor="let msg of messages" [ngClass]="msg.from">
+      <div class="bubble">
+        {{ msg.text }}
+      </div>
+    </div>
+
+    <!-- Typing indicator -->
+    <div *ngIf="isTyping" class="bot typing">
+      <div class="bubble typing-indicator">
+        Bot is typing<span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <input [(ngModel)]="userMessage" placeholder="Type a message..." (keyup.enter)="sendMessage()" />
+    <button (click)="sendMessage()">➤</button>
+  </div>
+</div>

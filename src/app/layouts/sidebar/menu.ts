@@ -13,6 +13,14 @@ export const MENU: MenuItem[] = [
         parentId: 2,
         icon: 'bx-home-circle',
     },
+    {
+        id: 2,
+        label: 'Cotton Stock Entry',
+        link: '/StockEntry',
+        parentId: 2,
+        icon: 'bx-store',
+    },
+
 
     {
         id: 2,
@@ -21,7 +29,20 @@ export const MENU: MenuItem[] = [
         parentId: 2,
         icon: 'bx-box',
     },
-
+    {
+    id: 2,
+    label: 'Mix Plans',
+    link: '/MixPlans',
+    parentId: 2,
+    icon: 'bx-layer',
+    },
+    {
+    id: 2,
+    label: 'Yarn Bot',
+    link: '/Yarnbot',
+    parentId: 2,
+    icon: 'bx-bot',
+    },
     // {
     //     id:4 ,
     //     label: 'Invoice Layout',

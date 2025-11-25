@@ -1,8 +1,7 @@
-<!-- inventory.component.html -->
-<main class="main-container">
-    <div class="content-wrapper">
+<div class="">
+    <div class="card">
         <!-- Page Heading -->
-        <div class="page-header">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h1 class="page-title">Raw Cotton Inventory Management</h1>
             <button class="btn-primary" (click)="addNewBale()">
                 <span class="material-symbols-outlined">+</span>
@@ -10,29 +9,50 @@
             </button>
         </div>
 
-        <!-- Stats -->
-        <div class="stats-grid">
-            <div class="stat-card">
+      <div class="card-body">
+        <div class="stats-grid-four">
+            <div class="stat-card stat-card-blue">
                 <p class="stat-label">Total Inventory (kg)</p>
                 <p class="stat-value">{{ stats.total | number }}</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card stat-card-green">
                 <p class="stat-label">Available Inventory (kg)</p>
                 <p class="stat-value">{{ stats.available | number }}</p>
             </div>
-            <div class="stat-card">
+            <div class="stat-card stat-card-amber">
                 <p class="stat-label">Quarantined Inventory (kg)</p>
                 <p class="stat-value">{{ stats.quarantined | number }}</p>
+            </div>
+            <div class="stat-card stat-card-sky">
+                <p class="stat-label">Total Bales Available</p>
+                <p class="stat-value">{{ stats.totalBales | number }}</p>
+            </div>
+        </div>
+
+        <!-- Procurement Actions Section -->
+        <div class="procurement-section">
+            <div class="procurement-header">
+                <h2 class="procurement-title">Procurement Actions</h2>
+                <div class="procurement-buttons">
+                    <button class="btn-secondary" (click)="createPurchasePlan()">
+                        <span class="material-symbols-outlined"></span>
+                        <span>Create Purchase Plan</span>
+                    </button>
+                    <button class="btn-primary" (click)="createPurchaseRequisition()">
+                        <span class="material-symbols-outlined"></span>
+                        <span>Create Purchase Requisition (PR)</span>
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- Search and Filters -->
         <div class="filter-section">
-            <div class="filter-grid">
-                <div class="search-wrapper">
+            <div class="filter-grid-new">
+                <div class="search-wrapper-full">
                     <label class="search-label">
                         <div class="search-input-wrapper">
-                            <div class="search-icon">
+                            <div class="search-icon" (click)="onSearchChange(searchQuery)">
                                 <span class="material-symbols-outlined">🔍︎</span>
                             </div>
                             <input 
@@ -40,11 +60,12 @@
                                 placeholder="Search by Bale ID, Lot Number, Vendor..."
                                 [(ngModel)]="searchQuery"
                                 (ngModelChange)="onSearchChange($event)"
+                                (keyup.enter)="onSearchChange(searchQuery)"
                             />
                         </div>
                     </label>
                 </div>
-                <div class="filter-buttons">
+                <div class="filter-buttons-extended">
                     <button class="filter-btn" (click)="onStatusChange('All')">
                         <p>Status: {{ selectedStatus }}</p>
                         <span class="bx bx-chevron-down"></span>
@@ -57,14 +78,19 @@
                         <p>Station: {{ selectedStation }}</p>
                         <span class="bx bx-chevron-down"></span>
                     </button>
+                    <button class="btn-export" (click)="exportToCSV()">
+                        <span class="material-symbols-outlined"></span>
+                        <span>Export to CSV</span>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Data Table -->
-        <div class="table-container">
-            <table class="data-table">
-                <thead>
+     
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-light text-center">
                     <tr>
                         <th class="th-checkbox">
                             <input 
@@ -97,7 +123,7 @@
                                 (change)="toggleBaleSelection(bale)"
                             />
                         </td>
-                        <td class="bale-id">{{ bale.id }}</td>
+                        <td >{{ bale.id }}</td>
                         <td>{{ bale.lotNumber }}</td>
                         <td>{{ bale.vendorName }}</td>
                         <td>{{ bale.stationName }}</td>
@@ -125,6 +151,7 @@
                 </tbody>
             </table>
         </div>
+     </div>
 
         <!-- Pagination -->
         <div class="pagination-wrapper">
@@ -161,5 +188,6 @@
                 </button>
             </div>
         </div>
-    </div>
-</main>
+     </div>
+    
+</div>

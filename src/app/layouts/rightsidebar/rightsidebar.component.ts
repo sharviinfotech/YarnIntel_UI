@@ -33,7 +33,7 @@ export class RightsidebarComponent implements OnInit {
   sidebar: string;
   initialAppState!: LayoutState;
   constructor(private eventService: EventService, public store: Store<RootReducerState>) { }
-
+ 
   ngOnInit() {
     this.initialAppState = initialState;
     this.store.select('layout').subscribe((data) => {
@@ -44,7 +44,7 @@ export class RightsidebarComponent implements OnInit {
       this.layoutSize = data.LAYOUT_WIDTH;
     })
     this.attribute = '';
-
+ 
     /**
      * horizontal-vertical layput set
      */
@@ -56,16 +56,30 @@ export class RightsidebarComponent implements OnInit {
     if (this.attribute == 'horizontal') {
       vertical.removeAttribute('checked');
     }
+    this.loadGoogleTranslate()
   }
-
-
+  loadGoogleTranslate() {
+    const script = document.createElement('script');
+    script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    document.body.appendChild(script);
+ 
+    (window as any).googleTranslateElementInit = () => {
+      new (window as any).google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi,mr,te,ta,gu,bn,kn,ml,pa,ur,or,as,ne,si,sd,ks,sa,doi,mai,mni,bho,grt,ne',
+        layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    };
+  }
+ 
   /**
    * Hide the sidebar
    */
   public hide() {
     document.body.classList.remove('right-bar-enabled');
   }
-
+ 
   /**
    * Change Topbar
    */
@@ -73,13 +87,13 @@ export class RightsidebarComponent implements OnInit {
     this.topbar = topbar;
     this.eventService.broadcast('changeTopbar', topbar);
   }
-
+ 
   // toggle button of layout mode
   toggleLayout() {
     this.theme = this.theme === 'vertical' ? 'horizontal' : 'vertical';
     this.changeLayout(this.theme);
   }
-
+ 
   /**
    * Change the layout onclick
    * @param layout Change the layout
@@ -91,7 +105,7 @@ export class RightsidebarComponent implements OnInit {
       document.documentElement.setAttribute('data-layout', layout)
     })
   }
-
+ 
   changeWidth(layoutWidth: any) {
     this.store.dispatch(changeLayoutWidth({ layoutWidth }));
     this.store.select(getLayoutWidth).subscribe((layoutWidth) => {
@@ -108,7 +122,7 @@ export class RightsidebarComponent implements OnInit {
       document.documentElement.setAttribute('data-sidebar', sidebarMode)
     })
   }
-
+ 
   changeMode(mode: string) {
     this.store.dispatch(changeMode({ mode }));
     this.store.select(getLayoutMode).subscribe((mode) => {

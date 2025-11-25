@@ -1,0 +1,130 @@
+<div class="">
+    <form [formGroup]="stockForm">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Stock Entry</span>
+                <button type="button" class="btn bn-md btn-raised btnAdd" (click)="addRow()">
+                     + Add Row
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                <div formArrayName="items">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-light text-center">
+                            <tr>
+                                <th>#</th>
+                                <th>Nature of Transaction</th>
+                                <th>Company Name|plant</th>
+                                <th>Posting Date</th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>Station Name</th>
+                                <th>S Lock</th>
+                                <th>Quantity</th>
+                                <th>Value</th>
+                                <th>Lot No  </th>
+                                <th>SCI  </th>
+                                <th>MIC(FF)  </th>
+                                <th>MAT</th>
+                                <th>LEN</th>
+                                <th>UNF</th>
+                                <th>SFI</th>
+                                <th>STR</th>
+                                <th>ELG</th>
+                                <th>RD</th>
+                                <th>+B</th>
+                                <th>TRASH%</th>
+                                <th>MOISTURE%</th>
+                                <th>NEPS_T</th>
+                                <th>BALES</th>
+                                <th>kgs</th>
+                                <th>UOM</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+ 
+                        <tbody>
+                            <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+                                <td class="text-center">{{ i + 1 }}</td>
+
+                                <td><input formControlName="NatureofTransaction" class="form-control form-control-sm" placeholder="Code" /></td>
+
+                                <td><input formControlName="CompanyName" class="form-control form-control-sm" placeholder="Name" /></td>
+
+                                <td><input formControlName="Postingdate" class="form-control form-control-sm" placeholder="Type" /></td>
+
+                                <td><input formControlName="productCode" class="form-control form-control-sm" placeholder="Code" /></td>
+
+                                <td><input formControlName="productName" class="form-control form-control-sm" placeholder="Name" /></td>
+
+                                <td><input formControlName="StationName" class="form-control form-control-sm" placeholder="Station Name" /></td>
+
+                                <td><input formControlName="SLock" class="form-control form-control-sm width-sm" placeholder="S Lock" /></td>
+
+                                <td><input formControlName="quantity" type="number" class="form-control form-control-sm width-sm" placeholder="Qty" /></td>
+
+                                <td><input formControlName="value" type="number" class="form-control form-control-sm width-sm" placeholder="Value" /></td>
+
+                                <td><input formControlName="Lot"  type="number" class="form-control form-control-sm width-sm" placeholder="LOT NO" /></td>
+
+                                <td><input formControlName="sci" type="number" class="form-control form-control-sm width-sm" placeholder="SCI" /></td>
+
+                                <td><input formControlName="micff" type="number" class="form-control form-control-sm width-sm" placeholder="MIC(FF)" /></td>
+
+                                <td><input formControlName="mat" type="number" class="form-control form-control-sm width-sm" placeholder="MAT" /></td>
+
+                                <td><input formControlName="len" type="number" class="form-control form-control-sm width-sm" placeholder="LEN" /></td>
+
+                                <td><input formControlName="unf" type="number" class="form-control form-control-sm width-sm" placeholder="UNF" /></td>
+
+                                <td><input formControlName="sfi" type="number" class="form-control form-control-sm width-sm" placeholder="SFI" /></td>
+
+                                <td><input formControlName="str" type="number" class="form-control form-control-sm width-sm" placeholder="STR" /></td>
+
+                                <td><input formControlName="elg" type="number" class="form-control form-control-sm width-sm" placeholder="ELG" /></td>
+
+                                <td><input formControlName="rd" type="number" class="form-control form-control-sm width-sm" placeholder="RD" /></td>
+
+                                <td><input formControlName="b" type="number" class="form-control form-control-sm width-sm" placeholder="B" /></td>
+
+                                <td><input formControlName="trash"  type="number" class="form-control form-control-sm width-sm" placeholder="TRASH%" /></td>
+
+                                <td><input formControlName="moisture" type="number" class="form-control form-control-sm width-sm" placeholder="MOISTUR%" /></td>
+
+                                <td><input formControlName="neps_t" type="number" class="form-control form-control-sm width-sm" placeholder="NEPS_T" /></td>
+
+                                <td><input formControlName="bales" type="number" class="form-control form-control-sm width-sm" placeholder="BALES" /></td>
+
+                                <td><input formControlName="kgs" type="number" class="form-control form-control-sm width-sm" placeholder="KGS" /></td>
+
+                                <td><input formControlName="uom"  class="form-control form-control-sm width-sm" placeholder="UOM" /></td>
+
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-sm btn-danger" (click)="removeRow(i)">
+                                        <i class="bx bx-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+
+ 
+ 
+ 
+                    </table>
+                </div>
+                </div>
+ 
+ 
+ 
+                <div class="text-right">
+                    <button type="button" class="btn btn-primary" (click)="saveStockEntry()">
+                        <i class="bx bx-save"></i> Post Stock
+                    </button>
+                </div>
+            </div>
+ 
+        </div>
+ 
+    </form>
+</div>

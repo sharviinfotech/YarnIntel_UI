@@ -20,12 +20,13 @@ interface InventoryStats {
   total: number;
   available: number;
   quarantined: number;
+  totalBales: number;
 }
 
 @Component({
   selector: 'app-inventory',
-  imports: [CommonModule, FormsModule],
   standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './inventory.component.html',
   styleUrls: ['./inventory.component.css']
 })
@@ -34,7 +35,8 @@ export class InventoryComponent implements OnInit {
   stats: InventoryStats = {
     total: 850320,
     available: 795110,
-    quarantined: 55210
+    quarantined: 55210,
+    totalBales: 3521
   };
 
   // Filter options
@@ -288,5 +290,62 @@ export class InventoryComponent implements OnInit {
 
   getEndIndex(): number {
     return Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
+  }
+
+  // New methods for procurement actions
+  createPurchasePlan(): void {
+    console.log('Create Purchase Plan clicked');
+    // Implement purchase plan creation logic here
+  }
+
+  createPurchaseRequisition(): void {
+    console.log('Create Purchase Requisition clicked');
+    // Implement PR creation logic here
+  }
+
+  // Export to CSV functionality
+  exportToCSV(): void {
+    console.log('Export to CSV clicked');
+    const csvData = this.convertToCSV(this.filteredBales);
+    this.downloadCSV(csvData, 'cotton_inventory.csv');
+  }
+
+  private convertToCSV(data: Bale[]): string {
+    const headers = ['Bale ID', 'Lot Number', 'Vendor Name', 'Station Name', 'Weight (kg)', 
+                     'Status', 'Staple (mm)', 'Micronaire', 'Strength (g/tex)', 'Trash (%)'];
+    
+    const rows = data.map(bale => [
+      bale.id,
+      bale.lotNumber,
+      bale.vendorName,
+      bale.stationName,
+      bale.weight,
+      bale.status,
+      bale.staple,
+      bale.micronaire,
+      bale.strength,
+      bale.trash
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    return csvContent;
+  }
+
+  private downloadCSV(csvContent: string, filename: string): void {
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 }

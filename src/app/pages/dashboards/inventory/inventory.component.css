@@ -58,6 +58,7 @@ body {
     font-size: 0.875rem;
     font-weight: bold;
     line-height: normal;
+    letter-spacing: 0.015em;
     gap: 0.5rem;
     border: none;
     transition: background-color 0.2s;
@@ -71,8 +72,70 @@ body {
     font-size: 1.25rem;
 }
 
-/* Stats Grid */
-.stats-grid {
+/* Secondary Button */
+.btn-secondary {
+    display: flex;
+    min-width: 84px;
+    max-width: 480px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: normal;
+    letter-spacing: 0.015em;
+    gap: 0.5rem;
+    border: none;
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary .material-symbols-outlined {
+    font-size: 1.25rem;
+}
+
+/* Export Button */
+.btn-export {
+    display: flex;
+    min-width: 84px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    padding: 0 1rem;
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    font-size: 0.875rem;
+    font-weight: bold;
+    line-height: normal;
+    letter-spacing: 0.015em;
+    gap: 0.5rem;
+    border: none;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-export:hover {
+    background-color: rgba(59, 130, 246, 0.3);
+}
+
+.btn-export .material-symbols-outlined {
+    font-size: 1.25rem;
+}
+
+/* Stats Grid - 4 Cards */
+.stats-grid-four {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -80,8 +143,14 @@ body {
 }
 
 @media (min-width: 768px) {
-    .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .stats-grid-four {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .stats-grid-four {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -91,12 +160,45 @@ body {
     gap: 0.5rem;
     border-radius: 0.75rem;
     padding: 1.5rem;
-    border: 1px solid #3c4453;
-    background-color: #1a1f2b;
+}
+
+.stat-card-blue {
+    background-color: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.stat-card-blue .stat-label {
+    color: #bfdbfe;
+}
+
+.stat-card-green {
+    background-color: rgba(22, 163, 74, 0.2);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.stat-card-green .stat-label {
+    color: #bbf7d0;
+}
+
+.stat-card-amber {
+    background-color: rgba(217, 119, 6, 0.2);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.stat-card-amber .stat-label {
+    color: #fde68a;
+}
+
+.stat-card-sky {
+    background-color: rgba(14, 165, 233, 0.2);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.stat-card-sky .stat-label {
+    color: #bae6fd;
 }
 
 .stat-label {
-    color: #9da6b8;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: normal;
@@ -109,36 +211,50 @@ body {
     line-height: 1.2;
 }
 
-/* Filter Section */
-.filter-section {
-    background-color: #1a1f2b;
+/* Procurement Actions Section */
+.procurement-section {
+   
     padding: 1rem;
     border-radius: 0.75rem;
     border: 1px solid #3c4453;
     margin-bottom: 1.5rem;
 }
 
-.filter-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+.procurement-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.procurement-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #7a6d6d;
+}
+
+.procurement-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Filter Section */
+.filter-section {
+   
+    padding: 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid #3c4453;
+    margin-bottom: 1.5rem;
+}
+
+.filter-grid-new {
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-}
-
-@media (min-width: 1024px) {
-    .filter-grid {
-        grid-template-columns: 2fr 2fr;
-    }
-}
-
-.search-wrapper {
-    grid-column: span 1;
-}
-
-@media (min-width: 1024px) {
-    .search-wrapper {
-        grid-column: span 1;
-    }
+    justify-content: space-between;
 }
 
 .search-label {
@@ -161,7 +277,7 @@ body {
 .search-icon {
     color: #9da6b8;
     display: flex;
-    background-color: #292e38;
+    background-color: #e9ebef;
     align-items: center;
     justify-content: center;
     padding-left: 1rem;
@@ -171,13 +287,13 @@ body {
 .search-input {
     flex: 1;
     width: 100%;
-    min-width: 0;
+    min-width: 40rem;
     resize: none;
     overflow: hidden;
     border-radius: 0 0.5rem 0.5rem 0;
     color: white;
     border: none;
-    background-color: #292e38;
+    background-color: #e9ebef;
     height: 100%;
     padding: 0 1rem;
     font-size: 0.875rem;
@@ -190,17 +306,12 @@ body {
     color: #9da6b8;
 }
 
-.filter-buttons {
-    display: flex;
-    gap: 0.75rem;
-    overflow-x: auto;
-    justify-content: flex-start;
-}
 
-@media (min-width: 1024px) {
-    .filter-buttons {
-        justify-content: flex-end;
-    }
+.filter-buttons-extended {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
 }
 
 .filter-btn {
@@ -231,7 +342,7 @@ body {
     white-space: nowrap;
 }
 
-.filter-btn .bx bx-chevron-down {
+.filter-btn .material-symbols-outlined {
     color: white;
     font-size: 1.25rem;
 }
@@ -256,7 +367,10 @@ body {
     font-size: 0.75rem;
     color: white;
     text-transform: uppercase;
-    background-color: #292e38;
+}
+
+.table-header-primary {
+    background-color: rgba(59, 130, 246, 0.8);
 }
 
 .data-table th {
