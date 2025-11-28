@@ -65,6 +65,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
           document.body.classList.remove('sidebar-enable');
           document.body.classList.remove('vertical-collpsed');
           document.body.removeAttribute('data-layout-scrollable');
+          
           break;
         case "dark":
           document.body.setAttribute('data-sidebar', 'dark');

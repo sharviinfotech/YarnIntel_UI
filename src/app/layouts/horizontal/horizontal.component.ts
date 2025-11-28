@@ -73,7 +73,7 @@ export class HorizontalComponent implements OnInit, AfterViewInit {
   /**
  * On mobile toggle button clicked
  */
-  onToggleMobileMenu() {
+ onToggleMobileMenu() {
     this.isCondensed = !this.isCondensed;
     document.body.classList.toggle('sidebar-enable');
     document.body.classList.toggle('vertical-collpsed');

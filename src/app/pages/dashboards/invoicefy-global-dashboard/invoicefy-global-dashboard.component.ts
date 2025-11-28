@@ -1,16 +1,17 @@
-import { ApexOptions } from 'apexcharts';
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { GeneralserviceService } from 'src/app/generalservice.service';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgApexchartsModule, ChartComponent } from 'ng-apexcharts';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { ApexChart, ApexResponsive } from "ng-apexcharts";
-import { BsDatepickerConfig, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
 
-export type ChartOptions = {
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+// ⬅️_IMPORT NG2-CHARTS MODULE FOR baseChart
+import { BaseChartDirective } from 'ng2-charts';
+
+// ⬅️_IMPORT correct type for chart.js options
+import { ChartConfiguration } from 'chart.js';
+export type MyChartOptions  = {
   series: any;
   chart: any;
   xaxis: any;
@@ -32,73 +33,77 @@ export type ChartOptions = {
   templateUrl: './invoicefy-global-dashboard.component.html',
   styleUrls: ['./invoicefy-global-dashboard.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, NgApexchartsModule, BsDatepickerModule, NgxSpinnerModule],
+  imports: [  CommonModule,
+    FormsModule,
+    NgApexchartsModule,
+    BsDatepickerModule,
+    NgxSpinnerModule,
+    BaseChartDirective    ],
 })
 export class InvoicefyGlobalDashboardComponent implements OnInit {
-  
-  // Last Updated text
-  lastUpdated: string = 'Just now';
+  lastUpdated = 'Just now';
 
-  // KPI Data - Updated to match the new design
+  // KPI Data
   kpiData = {
     activeMixPlans: 12,
     rawCottonInventory: 1500,
     rawCottonAvailable: 1250,
     rawCottonQuarantine: 250,
-    numberOfBales: 7500,          // NEW
-    blockedStock: 35200,          // NEW
+    numberOfBales: 7500,
+    blockedStock: 35200,
     pendingApprovals: 4,
     openQcIssues: 2
   };
 
-  // Chart Data: Planned vs Actual - Updated labels to match image
-  productionProgress = [
-    { metric: 'Monday', planned: 80, actual: 85 },
-    { metric: 'Tuesday', planned: 75, actual: 70 },
-    { metric: 'Wednesday', planned: 90, actual: 92 },
-    { metric: 'Thursday', planned: 88, actual: 90 },
-    { metric: 'Friday ', planned: 65, actual: 70 },
-    { metric: 'Saturday', planned: 85, actual: 88 },
-    { metric: 'Sunday', planned: 66, actual: 46 }
+  barChartLabels = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+  alerts = [
+    { type: 'Warning', message: 'High Moisture Alert: Bale #4815A', id: 'YARN-4821', time: '2 min ago' },
+    { type: 'Info', message: 'High Trash %: Lot #B2-6632', id: 'YARN-4822', time: '15 min ago' },
+    { type: 'Critical', message: 'Machine #3 Downtime Exceeded', id: 'YARN-4823', time: '1 hour ago' }
   ];
 
-  // Alerts - keeping the same structure
-  alerts = [
-    {
-      type: 'red',
-      message: 'High Moisture Alert: Bale #4815A',
-      time: '2 min ago'
-    },
-    {
-      type: 'amber',
-      message: 'High Trash %: Lot #B2-6632',
-      time: '15 min ago'
-    },
-    {
-      type: 'red',
-      message: 'Machine #3 Downtime Exceeded',
-      time: '1 hour ago'
+  // ⭐ ng2-charts dataset
+  barChartData = {
+    labels: this.barChartLabels,
+    datasets: [
+      {
+        label: 'Planned',
+        data: [80, 75, 90, 88, 65, 85, 66],
+        backgroundColor: 'rgba(54,162,235,0.6)',
+      },
+      {
+        label: 'Actual',
+        data: [85, 70, 92, 90, 70, 88, 46],
+        backgroundColor: 'rgba(255,99,132,0.6)',
+      }
+    ]
+  };
+
+  // ⭐ Correct type (NO conflict)
+  barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        max: 100
+      }
     }
-  ];
+  };
 
   constructor() {}
 
   ngOnInit(): void {
     this.updateTimestamp();
-    // Auto-refresh timestamp every minute (optional)
-    setInterval(() => {
-      this.updateTimestamp();
-    }, 60000);
+    setInterval(() => this.updateTimestamp(), 60000);
   }
 
-  // Refresh Last Updated label dynamically
   updateTimestamp() {
     const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    this.lastUpdated = `${hours}:${minutes} hrs`;
+    const h = now.getHours();
+    const m = now.getMinutes().toString().padStart(2,'0');
+    this.lastUpdated = `${h}:${m} hrs`;
   }
-
   // Quick Action Methods
   createNewMixPlan() {
     console.log('New Mix Plan clicked');

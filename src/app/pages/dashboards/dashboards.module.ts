@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { DashboardsRoutingModule } from './dashboards-routing.module';
 import { BsDropdownConfig} from 'ngx-bootstrap/dropdown';
 import { SampleComponentComponent } from './default/sample-component/sample-component.component';
-import { InvoiceLayoutComponent } from './invoice-layout/invoice-layout.component';
 
 
 import { CommonModule } from '@angular/common'; 

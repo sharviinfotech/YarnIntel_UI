@@ -74,9 +74,7 @@ export class GeneralserviceService {
   invoiceApprovedOrRejected(obj) {
     return this.http.post(environment.baseUrl + 'invoice/invoiceApprovedOrRejected', obj);
   }
-  forgotPassword(obj) {
-    return this.http.post(environment.baseUrl + 'invoice/forgotPassword', obj);
-  }
+ 
   getAllCustomerList() {
     return this.http.get(environment.baseUrl + 'invoice/getAllCustomerList');
   }
@@ -161,4 +159,12 @@ export class GeneralserviceService {
     return this.http.get(environment.baseUrl + '/invoice/Get_InventoryList');
   }
 
+
+  
+  SaveCottonStockEntry(obj: any) {
+    return this.http.post(environment.baseUrl + 'external//YarnIntel/cottonstockentrysave', obj);
+  }
+ forgotPassword(obj) {
+    return this.http.post(environment.baseUrl + 'invoice/forgotPassword', obj);
+  }
 }

@@ -164,29 +164,6 @@ checkForNewNotifications(){
       this.modalRef.close();
     });
   }
-verifyedInvoice(invoice){
-  let obj={
-      "originalUniqueId": invoice.originalUniqueId,
-      "reviewed":false,
-      "reviewedReSubmited":true
-     }
-   this.spinner.show()
-  this.service.verifyedAndUpdated(obj).subscribe(
-        (response: any) => {
-          console.log('Response:', response); 
-          this.spinner.hide()
-          this.modalService.dismissAll(); 
-        },
-        (error) => {
-          // Handle API errors
-          Swal.fire('Error!', 'Failed to update status. Please try again.', 'error');
-          console.error('Approval error:', error);
-          this.spinner.hide()
-        }
-      );
-  
-  
 
-}
   
 }

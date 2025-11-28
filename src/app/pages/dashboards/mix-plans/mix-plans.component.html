@@ -1,13 +1,13 @@
-<main class="main-container">
-  <div class="page-wrapper">
+<div class="">
+  <div class="card">
     <!-- Page Header -->
-    <div class="header-section">
+    <div class="card-header">
       <h1 class="title">Create New Mix Plan</h1>
       <p class="subtitle">Define the composition of your new cotton mix.</p>
     </div>
 
     <!-- Card -->
-    <div class="card-box">
+    <div class="card-body">
       <div class="card-header">
         <h2 class="card-title">Plan Details</h2>
       </div>
@@ -15,39 +15,39 @@
       <div class="card-body">
         <form [formGroup]="mixPlanForm" (ngSubmit)="savePlan()" class="form-section">
 
-          <!-- Mix Plan Name -->
-          <div>
+        <div class="row">
+            <!-- Mix Plan Name -->
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
             <label for="mix-plan-name" class="input-label">Mix Plan Name</label>
-            <input 
-              id="mix-plan-name" 
-              type="text" 
-              formControlName="mixPlanName"
-              placeholder="e.g., Premium Combed Cotton Mix - Q3" 
-              class="input-box">
-            <div *ngIf="mixPlanForm.get('mixPlanName')?.invalid && mixPlanForm.get('mixPlanName')?.touched" 
-                 class="error-text">
+            <input id="mix-plan-name" type="text" formControlName="mixPlanName"
+              placeholder="e.g., Premium Combed Cotton Mix - Q3" class="input-box">
+            <div *ngIf="mixPlanForm.get('mixPlanName')?.invalid && mixPlanForm.get('mixPlanName')?.touched"
+              class="error-text">
               Mix Plan Name is required
             </div>
           </div>
 
-          
-          <div>
+
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
             <label for="description" class="input-label">Description</label>
-            <textarea 
-              id="description" 
-              rows="3" 
-              formControlName="description"
-              placeholder="Add a brief description..." 
+            <textarea id="description" rows="3" formControlName="description" placeholder="Add a brief description..."
               class="textarea-box"></textarea>
           </div>
 
+        </div>
+
           <!-- Bale Table -->
           <div>
-            <h3 class="table-title">Raw Cotton Bales</h3>
-
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span>Raw Cotton Bales</span>
+              <button type="button" class="btn btn-md btn-raised btnAdd" (click)="addBaleRow()">
+                <span class="material-symbols-outlined">✚</span>
+                <span>Add Row</span>
+              </button>
+            </div>
 
             <div class="table-wrapper">
-              <table class="table table-bordered table-striped">
+              <table class="table table-bordered">
                 <thead class="table-light text-center">
                   <tr>
                     <th>Bale ID</th>
@@ -55,45 +55,28 @@
                     <th>Moisture %</th>
                     <th>Trash %</th>
                     <th>Action</th>
-                    
+
                   </tr>
                 </thead>
 
                 <tbody formArrayName="bales">
                   <tr *ngFor="let bale of bales.controls; let i = index" [formGroupName]="i">
                     <td>
-                      <input 
-                        type="text" 
-                        formControlName="baleId"
-                        placeholder="e.g., US-C-A-001" 
-                        class="table-input" />
+                      <input type="text" formControlName="baleId" placeholder="e.g., US-C-A-001" class="table-input" />
                     </td>
                     <td>
-                      <input 
-                        type="number" 
-                        formControlName="weight"
-                        placeholder="e.g., 220.5" 
+                      <input type="number" formControlName="weight" placeholder="e.g., 220.5"
                         class="table-input w-24" />
                     </td>
                     <td>
-                      <input 
-                        type="number" 
-                        formControlName="moisture"
-                        placeholder="e.g., 7.5" 
+                      <input type="number" formControlName="moisture" placeholder="e.g., 7.5"
                         class="table-input w-24" />
                     </td>
                     <td>
-                      <input 
-                        type="number" 
-                        formControlName="trash"
-                        placeholder="e.g., 2.1" 
-                        class="table-input w-24" />
+                      <input type="number" formControlName="trash" placeholder="e.g., 2.1" class="table-input w-24" />
                     </td>
                     <td class="text-right">
-                      <button 
-                        type="button" 
-                        class="btn btn-sm btn-danger" 
-                        (click)="deleteRow(i)"
+                      <button type="button" class="btn btn-sm btn-raised btnDelete" (click)="deleteRow(i)"
                         [disabled]="bales.length === 1">
                         <span class="bx bxs-trash "></span>
                       </button>
@@ -104,20 +87,17 @@
             </div>
 
             <!-- Add Row Button -->
-            <button type="button" class="add-row-btn" (click)="addBaleRow()">
-              <span class="material-symbols-outlined">✚</span>
-              <span>Add Row</span>
-            </button>
+
           </div>
 
         </form>
       </div>
 
       <!-- Footer Buttons -->
-      <div class="card-footer">
-        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
-        <button type="button" class="save-btn" (click)="savePlan()">Save Plan</button>
+      <div class="text-right">
+        <button type="button" class="btn btn-md btn-raised btnCancel" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-md btn-raised btnSave" (click)="savePlan()">Save Plan</button>
       </div>
     </div>
   </div>
-</main>
+</div>

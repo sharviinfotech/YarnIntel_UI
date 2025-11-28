@@ -1,13 +1,13 @@
 <div class="">
     <div class="card">
         <!-- Page Heading -->
+         
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h1 class="page-title">Raw Cotton Inventory Management</h1>
-            <button class="btn-primary" (click)="addNewBale()">
-                <span class="material-symbols-outlined">+</span>
-                <span>Add New Bale</span>
-            </button>
-        </div>
+                <span>Inventory</span>
+                <button type="button" class="btn bn-md btn-raised btnAdd" (click)="addNewBale()">
+                    + Add New Bale
+                </button>
+            </div>
 
       <div class="card-body">
         <div class="stats-grid-four">
@@ -34,11 +34,11 @@
             <div class="procurement-header">
                 <h2 class="procurement-title">Procurement Actions</h2>
                 <div class="procurement-buttons">
-                    <button class="btn-secondary" (click)="createPurchasePlan()">
+                    <button class="btn btn-md btn-raised btnAdd" (click)="createPurchasePlan()">
                         <span class="material-symbols-outlined"></span>
                         <span>Create Purchase Plan</span>
                     </button>
-                    <button class="btn-primary" (click)="createPurchaseRequisition()">
+                    <button class="btn btn-md btn-raised btnAdd" (click)="createPurchaseRequisition()">
                         <span class="material-symbols-outlined"></span>
                         <span>Create Purchase Requisition (PR)</span>
                     </button>
@@ -78,7 +78,7 @@
                         <p>Station: {{ selectedStation }}</p>
                         <span class="bx bx-chevron-down"></span>
                     </button>
-                    <button class="btn-export" (click)="exportToCSV()">
+                    <button class="btn btn-md btn-raised btnExport" (click)="exportToCSV()">
                         <span class="material-symbols-outlined"></span>
                         <span>Export to CSV</span>
                     </button>

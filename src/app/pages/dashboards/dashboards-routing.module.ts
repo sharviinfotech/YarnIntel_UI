@@ -8,7 +8,6 @@ import { BlogComponent } from './blog/blog.component';
 import { JobsComponent } from "./jobs/jobs.component";
 import { SampleComponentComponent } from './default/sample-component/sample-component.component';
 
-import { InvoiceLayoutComponent } from './invoice-layout/invoice-layout.component';
 import { StockEntryComponent } from './stock-entry/stock-entry.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { MixPlansComponent } from './mix-plans/mix-plans.component';
@@ -43,10 +42,7 @@ const routes: Routes = [
         component: SampleComponentComponent
     },
     
-    {
-        path: 'InvoiceLayout',
-        component: InvoiceLayoutComponent
-    },
+  
     {
         path: 'StockEntry',
         component: StockEntryComponent

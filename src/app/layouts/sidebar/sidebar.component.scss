@@ -37,10 +37,14 @@ background-repeat: no-repeat;
  
 .mm-active {
   // background-image: linear-gradient(to bottom,  #6ba3cd, #031c2e) !important;
-  background-color: #e8e4e4a1 !important;
-  color: #303773;
+  // background-color: #e8e4e4a1 !important;
+  // color: #303773;
+  // font-weight: bold;
+  // border-left: 4px solid #7e56b6;
   font-weight: bold;
-  border-left: 4px solid #7e56b6;
+    border-left: 3px solid rgb(29 78 216 / var(--tw-text-opacity, 1));
+    border-radius: 7px;
+    background-color: #c2ddfc61;
 }
  
 /* Override mm-active when a sub-menu item is active */
